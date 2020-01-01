@@ -43,7 +43,7 @@ async function bootstrap() {
 
     const configService = app.select(SharedModule).get(ConfigService);
     const port = configService.getNumber('PORT');
-    // const app = await NestFactory.create(AppModule);
+    app.setGlobalPrefix('api');
     await app.listen(port);
     // tslint:disable-next-line:no-console
     console.log(`Server running on ${port}`);

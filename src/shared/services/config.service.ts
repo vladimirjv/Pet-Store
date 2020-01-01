@@ -17,7 +17,7 @@ export class ConfigService {
         }
 
         // tslint:disable-next-line:no-console
-        console.info(process.env);
+        // console.info(process.env);
     }
 
     public get(key: string): string {
@@ -33,12 +33,12 @@ export class ConfigService {
     }
 
     get typeOrmConfig(): TypeOrmModuleOptions {
-        let entities = [__dirname + '/../../modules/**/*.entity{.ts,.js}'];
+        let entities = [__dirname + '/../../api/**/*.entity{.ts,.js}'];
         let migrations = [__dirname + '/../../migrations/*{.ts,.js}'];
 
         if ((module as any).hot) {
             const entityContext = (require as any).context(
-                './../../modules',
+                './../../api',
                 true,
                 /\.entity\.ts$/,
             );

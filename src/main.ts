@@ -1,5 +1,5 @@
 import { ValidationPipe } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { ExpressAdapter, NestExpressApplication } from '@nestjs/platform-express';
 import * as compression from 'compression';
 import * as helmet from 'helmet';
@@ -29,6 +29,13 @@ async function bootstrap() {
     app.use(helmet());
     app.use(compression());
     app.use(morgan('combined'));
+
+    // const reflector = app.get(Reflector);
+    // app.useGlobalFilters(
+    //     new HttpExceptionFilter(reflector),
+    //     new QueryFailedFilter(reflector),
+    // );
+    // app.useGlobalInterceptors(new ClassSerializerInterceptor(reflector));
 
     app.useGlobalPipes(
         new ValidationPipe({

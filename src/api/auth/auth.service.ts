@@ -7,9 +7,11 @@ import { TokenPayloadDto } from './dto/TokenPayloadDto';
 import { UserDto } from '../user/dto/User.dto';
 import { ConfigService } from '../../shared/services/config.service';
 import { JwtService } from '@nestjs/jwt';
+import { ContextService } from 'src/providers/context.service';
 
 @Injectable()
 export class AuthService {
+    private static authUserKey = 'user_key';
 
     constructor(
         private readonly userService: UserService,
@@ -37,5 +39,13 @@ export class AuthService {
             expiresIn: this.configService.getNumber('JWT_EXPIRATION_TIME'),
             accessToken: await this.jwtService.signAsync({id: user.id}),
         });
+    }
+
+    static setAuthUser(user: UserEntity) {
+        ContextService.set(AuthService.authUserKey, user);
+    }
+
+    static getAuthUser(): UserEntity {
+        return ContextService.get(AuthService.authUserKey);
     }
 }

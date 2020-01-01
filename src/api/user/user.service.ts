@@ -10,6 +10,10 @@ export class UserService {
         return this.userRepository.find();
     }
 
+    createUSer() {
+        // this.userRepository
+    }
+
     async findByUsernameOrEmail(
         options: Partial<{ username: string; email: string }>,
     ): Promise<UserEntity | undefined> {

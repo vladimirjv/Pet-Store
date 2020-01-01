@@ -15,6 +15,7 @@ export class UserController {
     @Post()
     create(@Body() body: RegisterUserDto) {
         // todo
-        return body;
+        // return body;
+        return this.userService.createUser(body);
     }
 }

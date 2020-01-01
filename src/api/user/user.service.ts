@@ -35,4 +35,8 @@ export class UserService {
 
         return queryBuilder.getOne();
     }
+
+    async findById(id: any): Promise<UserEntity> {
+        return this.userRepository.findOne(id);
+    }
 }

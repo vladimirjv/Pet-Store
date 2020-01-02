@@ -29,4 +29,6 @@ module.exports = {
     migrations: [
         'src/migrations/*{.ts,.js}',
     ],
+    seeds: ['src/db/seeds/**/*.seed{.ts,.js}'],
+    factories: ['src/db/factories/**/*.factory{.ts,.js}'],
 };

@@ -1,7 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { UserRepository } from './user.repository';
 import { UserEntity } from './user.entity';
-import { RegisterUserDto } from './dto/RegisterUser.dto';
+// import { RegisterUserDto } from './dto/RegisterUser.dto';
+import { UserRegisterDto } from '../auth/dto/UserRegisterDto';
+import { UpdateUserDto } from './dto/UpdateUser.dto';
+import { UserDto } from './dto/User.dto';
 
 @Injectable()
 export class UserService {
@@ -11,7 +14,7 @@ export class UserService {
         return this.userRepository.find();
     }
 
-    createUser(registerUserDto: RegisterUserDto): Promise<any> {
+    createUser(registerUserDto: UserRegisterDto): Promise<UserEntity> {
         // this.userRepository
         const user = this.userRepository.create(registerUserDto);
         return this.userRepository.save(user);
@@ -39,4 +42,11 @@ export class UserService {
     async findById(id: any): Promise<UserEntity> {
         return this.userRepository.findOne(id);
     }
+
+    async updateUser(id: string, user: UpdateUserDto): Promise<UserDto> {
+        await this.userRepository.update(id, user);
+        const userUpdated = await this.userRepository.findOne(id);
+        return new UserDto(userUpdated);
+    }
+
 }

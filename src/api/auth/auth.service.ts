@@ -8,6 +8,7 @@ import { UserDto } from '../user/dto/User.dto';
 import { ConfigService } from '../../shared/services/config.service';
 import { JwtService } from '@nestjs/jwt';
 import { ContextService } from '../../providers/context.service';
+import { UserRegisterDto } from './dto/UserRegisterDto';
 
 @Injectable()
 export class AuthService {
@@ -47,5 +48,10 @@ export class AuthService {
 
     static getAuthUser(): UserEntity {
         return ContextService.get(AuthService.authUserKey);
+    }
+
+    async register(registerUserDto: UserRegisterDto): Promise<UserDto> {
+        const user = await this.userService.createUser(registerUserDto);
+        return new UserDto(user);
     }
 }

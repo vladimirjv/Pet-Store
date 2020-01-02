@@ -1,4 +1,14 @@
-import { Controller, Get, Post, Body, UseGuards, HttpCode, HttpStatus, Param } from '@nestjs/common';
+import {
+    Controller,
+    Get,
+    Post,
+    Body,
+    UseGuards,
+    HttpCode,
+    HttpStatus,
+    Param,
+    Put,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { RegisterUserDto } from './dto/RegisterUser.dto';
 import { AuthGuard } from '../../guards/auth.guard';
@@ -6,12 +16,13 @@ import { Roles } from '../../decorators/roles.decorator';
 import { RoleType } from '../../common/constants/role-type';
 import { RolesGuard } from '../../guards/roles.guard';
 import { UserDto } from './dto/User.dto';
+import { UpdateUserDto } from './dto/UpdateUser.dto';
 
 @Controller('users')
 @UseGuards(AuthGuard, RolesGuard)
 export class UserController {
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService) { }
 
     @Get()
     @Roles(RoleType.USER)
@@ -38,5 +49,12 @@ export class UserController {
     async getUser(@Param('id') id: string) {
         const user = await this.userService.findById(id);
         return new UserDto(user);
+    }
+
+    @Put(':id')
+    @Roles(RoleType.USER, RoleType.ADMIN)
+    async updateUser(@Param('id') id: string, @Body() updateUser: UpdateUserDto) {
+        // todo
+        return this.userService.updateUser(id, updateUser);
     }
 }

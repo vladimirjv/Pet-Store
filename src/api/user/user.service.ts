@@ -8,7 +8,7 @@ import { UserDto } from './dto/User.dto';
 
 @Injectable()
 export class UserService {
-    constructor(private readonly userRepository: UserRepository) {}
+    constructor(public readonly userRepository: UserRepository) {}
 
     list() {
         return this.userRepository.find();

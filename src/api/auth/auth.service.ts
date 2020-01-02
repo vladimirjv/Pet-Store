@@ -7,7 +7,7 @@ import { TokenPayloadDto } from './dto/TokenPayloadDto';
 import { UserDto } from '../user/dto/User.dto';
 import { ConfigService } from '../../shared/services/config.service';
 import { JwtService } from '@nestjs/jwt';
-import { ContextService } from 'src/providers/context.service';
+import { ContextService } from '../../providers/context.service';
 
 @Injectable()
 export class AuthService {

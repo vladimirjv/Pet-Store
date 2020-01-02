@@ -6,6 +6,7 @@ import { SharedModule } from './shared/shared.module';
 import { ConfigService } from './shared/services/config.service';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
+import { PetModule } from './api/pet/pet.module';
 
 @Module({
     imports: [
@@ -17,6 +18,7 @@ import { AuthModule } from './api/auth/auth.module';
         }),
         UserModule,
         AuthModule,
+        PetModule,
     ],
     controllers: [AppController],
     providers: [AppService],

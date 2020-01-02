@@ -4,6 +4,6 @@ import { PetService } from './pet.service';
 
 @Module({
   controllers: [PetController],
-  providers: [PetService]
+  providers: [PetService],
 })
 export class PetModule {}

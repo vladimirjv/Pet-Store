@@ -11,6 +11,6 @@ export class PetEntity extends AbstractEntity {
     @Column({ nullable: false })
     age: number;
 
-    // @ManyToOne(type => UserEntity, user => user.pets)
-    // user: UserEntity;
+    @ManyToOne(type => UserEntity, user => user.pets)
+    user: UserEntity;
 }

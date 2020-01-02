@@ -1,9 +1,10 @@
-import { Entity, Column } from 'typeorm';
+import { Entity, Column, OneToMany } from 'typeorm';
 
 import { AbstractEntity } from '../../common/abstract.entity';
 import { RoleType } from '../../common/constants/role-type';
 // import { UserDto } from './dto/UserDto';
 import { PasswordTransformer } from './password.transformer';
+import { PetEntity } from '../pet/pet.entity';
 
 @Entity({ name: 'users' })
 export class UserEntity extends AbstractEntity {
@@ -27,4 +28,7 @@ export class UserEntity extends AbstractEntity {
 
     @Column({ nullable: true })
     avatar: string;
+
+    @OneToMany(type => PetEntity, photo => photo.user)
+    pets: PetEntity[];
 }

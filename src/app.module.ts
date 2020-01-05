@@ -7,6 +7,7 @@ import { ConfigService } from './shared/services/config.service';
 import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
 import { PetModule } from './api/pet/pet.module';
+import { VaccineModule } from './api/vaccine/vaccine.module';
 
 @Module({
     imports: [
@@ -19,6 +20,7 @@ import { PetModule } from './api/pet/pet.module';
         UserModule,
         AuthModule,
         PetModule,
+        VaccineModule,
     ],
     controllers: [AppController],
     providers: [AppService],

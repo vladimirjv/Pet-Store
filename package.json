@@ -55,6 +55,7 @@
     "uuid": "^3.3.3"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.11",
     "@nestjs/testing": "^6.0.0",
     "@types/bcrypt": "^3.0.0",
     "@types/compression": "^1.0.1",

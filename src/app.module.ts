@@ -8,6 +8,7 @@ import { UserModule } from './api/user/user.module';
 import { AuthModule } from './api/auth/auth.module';
 import { PetModule } from './api/pet/pet.module';
 import { VaccineModule } from './api/vaccine/vaccine.module';
+import { MedModule } from './api/med/med.module';
 
 @Module({
     imports: [
@@ -21,6 +22,7 @@ import { VaccineModule } from './api/vaccine/vaccine.module';
         AuthModule,
         PetModule,
         VaccineModule,
+        MedModule,
     ],
     controllers: [AppController],
     providers: [AppService],

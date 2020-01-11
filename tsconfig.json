@@ -23,8 +23,11 @@
         "sourceMap": true,
         "allowJs": true,
         "outDir": "./dist",
+        "incremental": true,
         "baseUrl": "./",
-        "incremental": true
+        "paths": {
+            "~/*": ["./src/*"],
+        }
     },
     "include": [
         "src/**/*"

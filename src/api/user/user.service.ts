@@ -10,8 +10,12 @@ import { UserDto } from './dto/User.dto';
 export class UserService {
     constructor(public readonly userRepository: UserRepository) {}
 
-    list() {
-        return this.userRepository.find();
+    async list() {
+        const users = await this.userRepository.find();
+        const usersDto = users.map(user => {
+            return new UserDto(user);
+        });
+        return usersDto;
     }
 
     createUser(registerUserDto: UserRegisterDto): Promise<UserEntity> {

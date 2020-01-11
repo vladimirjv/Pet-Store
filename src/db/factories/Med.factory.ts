@@ -3,13 +3,11 @@ import { define } from 'typeorm-seeding';
 import { Med as MedEntity } from '../../api/med/med.entity';
 import { PharmaceuticalFormTypes } from '../../api/med/constants/PharmaceuticalFormTypes';
 import { AdministrationRoutes } from '../../api/med/constants/AdministrationRoutes';
-// import DrugsJson from '../../../static/medicine/drugs.json';
-// const Drugs = (DrugsJson as { drugs: string[] }).drugs;
 import { drugs as Drugs } from '../../../static/medicine/drugs.json';
 import { pharmaceuticalForms } from '../../../static/medicine/pharmaceuticalForms.json';
 import { symptoms } from '../../../static/medicine/symptoms.json';
-import { MeasureUnits } from '~/api/med/constants/MeasureUnits';
-import { ContainerTypes } from '~/api/med/constants/ContainerTypes';
+import { MeasureUnits } from '../../api/med/constants/MeasureUnits';
+import { ContainerTypes } from '../../api/med/constants/ContainerTypes';
 
 interface SettingsMedFactory {
     PharmaceuticalFormType?: PharmaceuticalFormTypes;
@@ -22,12 +20,12 @@ const SettingsMedFactoryDefaults: SettingsMedFactory = {
 define(MedEntity, (faker: typeof Faker, settings: SettingsMedFactory = SettingsMedFactoryDefaults) => {
     const medName = Drugs[faker.random.number(Drugs.length - 1)];
     // const commercialName = pharmaceuticalForms[faker.random.number(pharmaceuticalForms.length - 1)];
-    const commercialName = Drugs[faker.random.number(Drugs.length - 1)];
+    const commercialName = medName;
     const description = faker.lorem.sentence(faker.random.number({ min: 100, max: 150 }));
 
     let measure: number;
     let measureUnit: MeasureUnits;
-    const measureUnitNumber = faker.random.number({ min: 0, max: 3 });
+    const measureUnitNumber = faker.random.number({ min: 0, max: 2 });
     switch (measureUnitNumber) {
         case 0:
             measureUnit = MeasureUnits.UNIT;
@@ -68,13 +66,8 @@ define(MedEntity, (faker: typeof Faker, settings: SettingsMedFactory = SettingsM
     return med;
 });
 
-function randomEnum<T>(anEnum: T): T[keyof T] {
-    const enumValues = Object.keys(anEnum)
-      // tslint:disable-next-line:radix
-      .map(n => Number.parseInt(n))
-      // tslint:disable-next-line:array-type
-      .filter(n => !Number.isNaN(n)) as unknown as T[keyof T][];
-    const randomIndex = Math.floor(Math.random() * enumValues.length);
-    const randomEnumValue = enumValues[randomIndex];
-    return randomEnumValue;
-  }
+function randomEnum(enumeration) {
+    const values = Object.keys(enumeration);
+    const enumKey = values[Math.floor(Math.random() * values.length)];
+    return enumeration[enumKey];
+}

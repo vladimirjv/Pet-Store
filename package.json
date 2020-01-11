@@ -17,6 +17,7 @@
     "migration:revert": "ts-node node_modules/typeorm/cli.js migration:revert -f ormconfig",
     "migration:create": "ts-node node_modules/typeorm/cli.js migration:create -f ormconfig -d src/migrations -n",
     "seed": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "seed:class": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed --class",
     "seed:help": "ts-node ./node_modules/typeorm-seeding/dist/cli.js -h",
     "schema:drop": "ts-node node_modules/typeorm/cli.js schema:drop -f ormconfig",
     "lint": "tslint -p tsconfig.json -c tslint.json",

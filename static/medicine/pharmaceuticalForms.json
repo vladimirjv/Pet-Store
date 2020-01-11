@@ -1,0 +1,31 @@
+{
+    "description": "A list of pharmaceutical form names",
+    "source": "https://en.wikipedia.org/wiki/Dosage_form",
+    "pharmaceuticalForms": [
+        "Pill, i.e. tablet or capsule",
+        "Syrups",
+        "Specialty tablet like buccal, sub-lingual, or orally-disintegrating",
+        "Thin film",
+        "Liquid solution or suspension (e.g., drink or syrup)",
+        "Powder or liquid or solid crystals",
+        "Natural or herbal plant, seed",
+        "Pastes",
+        "Liquid solution",
+        "Aerosol",
+        "Inhaler",
+        "Nebulizer",
+        "Smoking",
+        "Vaporizer",
+        "Cream",
+        "gel",
+        "liniment or balm",
+        "lotion",
+        "ointment",
+        "Ear drops",
+        "Eye drops",
+        "Skin patch",
+        "Vaginal rings",
+        "Dermal patch",
+        "Powder/Talc"
+    ]
+}

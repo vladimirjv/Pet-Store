@@ -1,11 +1,15 @@
 import Faker from 'faker';
 import { define } from 'typeorm-seeding';
-// import { UserEntity } from '../../api/user/user.entity';
 import { Med as MedEntity } from '../../api/med/med.entity';
 import { PharmaceuticalFormTypes } from '../../api/med/constants/PharmaceuticalFormTypes';
 import { AdministrationRoutes } from '../../api/med/constants/AdministrationRoutes';
-import DrugsJson from '../../../static/medicine/drugs.json';
-const drugs = (DrugsJson as { drugs: string[] }).drugs;
+// import DrugsJson from '../../../static/medicine/drugs.json';
+// const Drugs = (DrugsJson as { drugs: string[] }).drugs;
+import { drugs as Drugs } from '../../../static/medicine/drugs.json';
+import { pharmaceuticalForms } from '../../../static/medicine/pharmaceuticalForms.json';
+import { symptoms } from '../../../static/medicine/symptoms.json';
+import { MeasureUnits } from '~/api/med/constants/MeasureUnits';
+import { ContainerTypes } from '~/api/med/constants/ContainerTypes';
 
 interface SettingsMedFactory {
     PharmaceuticalFormType?: PharmaceuticalFormTypes;
@@ -16,19 +20,61 @@ const SettingsMedFactoryDefaults: SettingsMedFactory = {
     AdministrationRoute: null,
 };
 define(MedEntity, (faker: typeof Faker, settings: SettingsMedFactory = SettingsMedFactoryDefaults) => {
-    const gender = faker.random.number(1);
-    const firstName = faker.name.firstName(gender);
-    const lastName = faker.name.lastName(gender);
-    const email = faker.internet.email(firstName, lastName);
-    const password = faker.internet.password(7);
-    const phone = faker.phone.phoneNumber();
+    const medName = Drugs[faker.random.number(Drugs.length - 1)];
+    // const commercialName = pharmaceuticalForms[faker.random.number(pharmaceuticalForms.length - 1)];
+    const commercialName = Drugs[faker.random.number(Drugs.length - 1)];
+    const description = faker.lorem.sentence(faker.random.number({ min: 100, max: 150 }));
 
-    const user = new MedEntity();
-    // user.firstName = firstName;
-    // user.lastName = lastName;
-    // user.email = email;
-    // user.password = password;
-    // user.phone = phone;
-    // user.role = settings.role;
-    return user;
+    let measure: number;
+    let measureUnit: MeasureUnits;
+    const measureUnitNumber = faker.random.number({ min: 0, max: 3 });
+    switch (measureUnitNumber) {
+        case 0:
+            measureUnit = MeasureUnits.UNIT;
+            measure = faker.random.number({ min: 1, max: 5 });
+            break;
+        case 1:
+            measureUnit = MeasureUnits.ML;
+            measure = faker.random.number({ min: 50, max: 400 });
+            break;
+        case 2:
+            measureUnit = MeasureUnits.MGR;
+            measure = faker.random.number({ min: 50, max: 750 });
+            break;
+    }
+
+    const containerType = randomEnum(ContainerTypes);
+    const warnings = faker.lorem.sentence(faker.random.number({ min: 100, max: 150 }));
+    const sideEffects = symptoms[faker.random.number(symptoms.length - 1)];
+
+    const classification = faker.lorem.word();
+    const pharmaceuticalFormType = randomEnum(PharmaceuticalFormTypes);
+    const administrationRoute = randomEnum(AdministrationRoutes);
+    const pharmaceuticalForm = pharmaceuticalForms[faker.random.number(pharmaceuticalForms.length - 1)];
+
+    const med = new MedEntity();
+    med.medName = medName;
+    med.commercialName = commercialName;
+    med.description = description;
+    med.measure = measure;
+    med.measureUnit = measureUnit;
+    med.containerType = containerType;
+    med.warnings = warnings;
+    med.sideEffects = sideEffects;
+    med.classification = classification;
+    med.pharmaceuticalFormType = pharmaceuticalFormType;
+    med.administrationRoute = administrationRoute;
+    med.pharmaceuticalForm = pharmaceuticalForm;
+    return med;
 });
+
+function randomEnum<T>(anEnum: T): T[keyof T] {
+    const enumValues = Object.keys(anEnum)
+      // tslint:disable-next-line:radix
+      .map(n => Number.parseInt(n))
+      // tslint:disable-next-line:array-type
+      .filter(n => !Number.isNaN(n)) as unknown as T[keyof T][];
+    const randomIndex = Math.floor(Math.random() * enumValues.length);
+    const randomEnumValue = enumValues[randomIndex];
+    return randomEnumValue;
+  }

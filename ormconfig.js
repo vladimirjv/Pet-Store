@@ -1,5 +1,8 @@
 /* tslint:disable:quotemark object-literal-sort-keys */
 import * as dotenv from 'dotenv';
+import * as register from 'module-alias/register';
+// tslint:disable-next-line:no-unused-expression
+register;
 // import { SnakeNamingStrategy } from './src/snake-naming.strategy';
 
 if (!module.hot /* for webpack HMR */) {

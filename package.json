@@ -28,7 +28,9 @@
         "test:e2e": "jest --config ./test/jest-e2e.json"
     },
     "_moduleAliases": {
-        "@src": "dist"
+        "@src": "dist",
+        "~": "dist",
+        "@static": "static"
     },
     "dependencies": {
         "@nestjs/common": "^6.0.0",

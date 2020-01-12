@@ -1,8 +1,8 @@
 import { Controller, UseGuards, Get, Post, Body } from '@nestjs/common';
-import { AuthGuard } from '~/guards/auth.guard';
-import { RolesGuard } from '~/guards/roles.guard';
-import { Roles } from '~/decorators/roles.decorator';
-import { RoleType } from '~/common/constants/role-type';
+import { AuthGuard } from '@src/guards/auth.guard';
+import { RolesGuard } from '@src/guards/roles.guard';
+import { Roles } from '@src/decorators/roles.decorator';
+import { RoleType } from '@src/common/constants/role-type';
 import { MedService } from './med.service';
 import { CreateMedDto } from './dto/CreateMed.dto';
 

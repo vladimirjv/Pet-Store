@@ -20,6 +20,6 @@ export class MedController {
     @Post()
     @Roles(RoleType.USER, RoleType.ADMIN)
     async createMed(@Body() createMed: CreateMedDto) {
-        return createMed;
+        return this.medService.createMed(createMed);
     }
 }

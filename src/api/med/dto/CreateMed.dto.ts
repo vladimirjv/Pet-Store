@@ -17,9 +17,9 @@ export class CreateMedDto {
     @IsNotEmpty({ message: 'Commercial Name is required' })
     commercialName: string;
 
-    @IsString()
-    @MaxLength(500)
-    @IsOptional()
+    @IsString({ message: 'Description must be a string' })
+    @MaxLength(500, { message: 'Description max length is 500' })
+    @IsNotEmpty({ message: 'Description is required' })
     description: string;
 
     @IsNumber({ maxDecimalPlaces: 2 }, { message: 'Set Measure quantity to 2 decimals' })

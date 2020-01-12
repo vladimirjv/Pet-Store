@@ -1,6 +1,9 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { ExpressAdapter, NestExpressApplication } from '@nestjs/platform-express';
+import * as register from 'module-alias/register';
+// tslint:disable-next-line:no-unused-expression
+register;
 import * as compression from 'compression';
 import * as helmet from 'helmet';
 import * as morgan from 'morgan';

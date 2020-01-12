@@ -27,8 +27,12 @@
         "incremental": true,
         "baseUrl": "./",
         "paths": {
-            "~/*": ["./src/*"],
-            "~static": ["./static/*"],
+            "~/*": [
+                "./src/*",
+                "src/*"
+            ],
+            "@static/*": ["./src/assets/*"]
+            // "~static": ["./static/*"],
         }
     },
     "include": [
@@ -36,6 +40,7 @@
     ],
     "exclude": [
         "node_modules",
-        "dist"
+        "dist",
+        "assets"
     ]
 }

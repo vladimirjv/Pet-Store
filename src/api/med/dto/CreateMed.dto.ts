@@ -1,5 +1,9 @@
-import { IsString, IsNotEmpty, MaxLength, IsOptional, IsDecimal, IsEnum } from 'class-validator';
+import { IsString, IsNotEmpty, MaxLength, IsOptional, IsDecimal, IsEnum, IsNumber, Max } from 'class-validator';
 import { MeasureUnits } from '../constants/MeasureUnits';
+import { EnumToString } from '~/helpers/functions/EnumToString';
+import { ContainerTypes } from '../constants/ContainerTypes';
+import { PharmaceuticalFormTypes } from '../constants/PharmaceuticalFormTypes';
+import { AdministrationRoutes } from '../constants/AdministrationRoutes';
 
 export class CreateMedDto {
     // Description
@@ -18,34 +22,51 @@ export class CreateMedDto {
     @IsOptional()
     description: string;
 
-    @IsDecimal({ decimal_digits: '2' })
-    @IsNotEmpty()
-    measure: number = 0.0;
+    @IsNumber({ maxDecimalPlaces: 2 }, { message: 'Set Measure quantity to 2 decimals' })
+    @IsNotEmpty({ message: 'Measure quantity required' })
+    measure: number;
 
-    @IsEnum(MeasureUnits)
-    @IsNotEmpty()
+    @IsEnum(MeasureUnits, { message: `MeasureUnits must be on of this ${EnumToString(MeasureUnits)}` })
+    @IsNotEmpty({ message: 'MeasureUnits is required' })
     measureUnit: MeasureUnits;
 
-    // @Column({ type: 'enum', enum: ContainerTypes, nullable: false })
-    // containerType: ContainerTypes;
+    @IsEnum(ContainerTypes, { message: `Container type must be on of this ${EnumToString(ContainerTypes)}` })
+    @IsNotEmpty({ message: 'Container type is required' })
+    containerType: ContainerTypes;
 
     // // warnings
-    // @Column('text', { default: '' })
-    // warnings: string;
+    @IsString({ message: 'warnings must be an string' })
+    @MaxLength(500, { message: 'warnings mas length is 500' })
+    @IsOptional()
+    warnings: string;
 
-    // @Column('text', { default: '' })
-    // sideEffects: string;
+    @IsString({ message: 'side effects must be an string' })
+    @MaxLength(500, { message: 'side effects max length is 500' })
+    @IsOptional()
+    sideEffects: string;
 
     // // Classification
-    // @Column('varchar', { default: '', nullable: false })
-    // classification: string;
+    @IsString({ message: 'classification must be a string' })
+    @IsNotEmpty({ message: 'classification is required' })
+    classification: string;
 
-    // @Column({ type: 'enum', enum: PharmaceuticalFormTypes, nullable: false })
-    // pharmaceuticalFormType: PharmaceuticalFormTypes;
+    @IsEnum(
+        PharmaceuticalFormTypes,
+        { message: `Pharmaceutical form type must be on of this ${EnumToString(PharmaceuticalFormTypes)}` },
+    )
+    @IsNotEmpty({ message: 'Pharmaceutical form type is required' })
+    pharmaceuticalFormType: PharmaceuticalFormTypes;
 
-    // @Column({ type: 'enum', enum: AdministrationRoutes, nullable: false })
-    // administrationRoute: AdministrationRoutes;
+    @IsEnum(
+        AdministrationRoutes,
+        { message: `Administration Route must be on of this ${EnumToString(AdministrationRoutes)}` },
+    )
+    @IsNotEmpty({ message: 'Administration Route is required' })
+    administrationRoute: AdministrationRoutes;
 
     // @Column({ type: 'varchar', length: 150, nullable: false })
-    // pharmaceuticalForm: string;
+    @IsString({ message: 'Pharmaceutical form must be a string' })
+    @MaxLength(150, { message: 'Pharmaceutical form max length is 150' })
+    @IsNotEmpty({ message: 'Pharmaceutical form is required' })
+    pharmaceuticalForm: string;
 }

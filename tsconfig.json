@@ -31,7 +31,7 @@
                 "./src/*",
                 "src/*"
             ],
-            "@static/*": ["./static/*"]
+            "@static/*": ["./src/assets/*"]
             // "~static": ["./static/*"],
         }
     },
@@ -40,6 +40,7 @@
     ],
     "exclude": [
         "node_modules",
-        "dist"
+        "dist",
+        "assets"
     ]
 }

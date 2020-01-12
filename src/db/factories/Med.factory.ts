@@ -1,9 +1,9 @@
 import Faker from 'faker';
 import { define } from 'typeorm-seeding';
 
-import { symptoms } from '@static/medicine/symptoms.json';
-import { drugs as Drugs } from '@static/medicine/drugs.json';
-import { pharmaceuticalForms } from '@static/medicine/pharmaceuticalForms.json';
+import { symptoms } from '@static/symptoms.json';
+import { drugs as Drugs } from '@static/drugs.json';
+import { pharmaceuticalForms } from '@static/pharmaceuticalForms.json';
 
 import { MeasureUnits } from '~/api/med/constants/MeasureUnits';
 import { ContainerTypes } from '~/api/med/constants/ContainerTypes';

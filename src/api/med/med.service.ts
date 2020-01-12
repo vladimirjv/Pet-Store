@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { MedRepository } from './med.repository';
 import { Med } from './med.entity';
+import { FindManyOptions, FindConditions } from 'typeorm';
 
 @Injectable()
 export class MedService {
@@ -8,8 +9,17 @@ export class MedService {
         private readonly medRepository: MedRepository,
     ) {}
 
-    async list() {
-        const meds: [Med[], number] = await this.medRepository.findAndCount();
+    async listAndCount(options: FindManyOptions) {
+        const meds: [Med[], number] = await this.medRepository.findAndCount(options);
         return meds;
+    }
+
+    async list(): Promise<Med[]> {
+        const meds = await this.medRepository.find();
+        return meds;
+    }
+
+    async createMed() {
+        return;
     }
 }

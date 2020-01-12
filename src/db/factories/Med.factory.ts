@@ -3,9 +3,9 @@ import { define } from 'typeorm-seeding';
 import { Med as MedEntity } from '../../api/med/med.entity';
 import { PharmaceuticalFormTypes } from '../../api/med/constants/PharmaceuticalFormTypes';
 import { AdministrationRoutes } from '../../api/med/constants/AdministrationRoutes';
-import { drugs as Drugs } from '../../../static/medicine/drugs.json';
-import { pharmaceuticalForms } from '../../../static/medicine/pharmaceuticalForms.json';
-import { symptoms } from '../../../static/medicine/symptoms.json';
+import { drugs as Drugs } from '../../static/medicine/drugs.json';
+import { pharmaceuticalForms } from '../../static/medicine/pharmaceuticalForms.json';
+import { symptoms } from '../../static/medicine/symptoms.json';
 import { MeasureUnits } from '../../api/med/constants/MeasureUnits';
 import { ContainerTypes } from '../../api/med/constants/ContainerTypes';
 

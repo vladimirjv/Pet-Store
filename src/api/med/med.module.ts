@@ -1,7 +1,14 @@
 import { Module } from '@nestjs/common';
 import { MedService } from './med.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { MedRepository } from './med.repository';
+import { MedController } from './med.controller';
 
 @Module({
-  providers: [MedService]
+    imports: [
+        TypeOrmModule.forFeature([MedRepository]),
+    ],
+    providers: [MedService],
+    controllers: [MedController],
 })
-export class MedModule {}
+export class MedModule { }

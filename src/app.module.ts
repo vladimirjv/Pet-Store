@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { GraphQLModule } from '@nestjs/graphql';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { SharedModule } from './shared/shared.module';
@@ -17,6 +18,9 @@ import { MedModule } from './api/med/med.module';
             useFactory: (configService: ConfigService) =>
                 configService.typeOrmConfig,
             inject: [ConfigService],
+        }),
+        GraphQLModule.forRoot({
+            typePaths: ['./api/**/*.graphql'],
         }),
         UserModule,
         AuthModule,

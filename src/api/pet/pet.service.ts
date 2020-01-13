@@ -10,7 +10,7 @@ import { UpdatePetDto } from './dto/updatePet.dto';
 @Injectable()
 export class PetService {
     constructor(
-        private readonly petRepository: PetRepository,
+        public readonly petRepository: PetRepository,
         private readonly userService: UserService,
     ) { }
 

@@ -10,6 +10,7 @@ import { AuthModule } from './api/auth/auth.module';
 import { PetModule } from './api/pet/pet.module';
 // import { VaccineModule } from './api/vaccine/vaccine.module';
 import { MedModule } from './api/med/med.module';
+import { join } from 'path';
 
 @Module({
     imports: [
@@ -20,7 +21,8 @@ import { MedModule } from './api/med/med.module';
             inject: [ConfigService],
         }),
         GraphQLModule.forRoot({
-            typePaths: ['./api/**/*.graphql'],
+            typePaths: ['src/api/**/*.graphql'],
+            installSubscriptionHandlers: true,
         }),
         UserModule,
         AuthModule,

@@ -1,0 +1,13 @@
+type Pet {
+    id: String!
+    name: String
+    age: Int
+    createdAt: String
+    updatedAt: String
+    user: User
+}
+
+type Query {
+  getPets: [Pet]
+}
+

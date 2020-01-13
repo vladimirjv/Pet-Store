@@ -4,6 +4,7 @@ import { PetController } from './pet.controller';
 import { PetService } from './pet.service';
 import { PetRepository } from './pet.repository';
 import { UserModule } from '../user/user.module';
+import { PetResolver } from './pet.resolver';
 
 @Module({
     imports: [
@@ -11,6 +12,6 @@ import { UserModule } from '../user/user.module';
         UserModule,
     ],
     controllers: [PetController],
-    providers: [PetService],
+    providers: [PetService, PetResolver],
 })
 export class PetModule { }

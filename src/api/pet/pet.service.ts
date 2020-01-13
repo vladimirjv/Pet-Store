@@ -4,6 +4,7 @@ import { PetEntity } from './pet.entity';
 import { CreatePetDto } from './dto/createPet.dto';
 import { UserService } from '../user/user.service';
 import { PetDto } from './dto/pet.dto';
+import { NotFoundWithId } from '~/exceptions/NotFoundWithId';
 
 @Injectable()
 export class PetService {
@@ -33,5 +34,15 @@ export class PetService {
             await this.userService.userRepository.save(user);
         }
         return petInstance;
+    }
+
+    async getPet(id: string) {
+        try {
+            const pet = new PetDto((await this.petRepository.findOneOrFail(id, {relations: ['user']})));
+            return pet;
+        } catch (error) {
+            throw new NotFoundWithId(id, PetEntity.name);
+        }
+        // return;
     }
 }

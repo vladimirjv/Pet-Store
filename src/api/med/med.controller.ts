@@ -29,6 +29,7 @@ export class MedController {
     async getMed(@Param('id') id: string) {
         return this.medService.getMed(id);
     }
+
     @Put(':id')
     @Roles(RoleType.USER, RoleType.ADMIN)
     async updateMed(

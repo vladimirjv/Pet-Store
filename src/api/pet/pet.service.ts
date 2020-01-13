@@ -5,16 +5,17 @@ import { CreatePetDto } from './dto/createPet.dto';
 import { UserService } from '../user/user.service';
 import { PetDto } from './dto/pet.dto';
 import { NotFoundWithId } from '~/exceptions/NotFoundWithId';
+import { UpdatePetDto } from './dto/updatePet.dto';
 
 @Injectable()
 export class PetService {
     constructor(
         private readonly petRepository: PetRepository,
         private readonly userService: UserService,
-    ) {}
+    ) { }
 
     async list() {
-        const pets = await (await this.petRepository.find({relations: ['user']})).map(pet => new PetDto(pet));
+        const pets = await (await this.petRepository.find({ relations: ['user'] })).map(pet => new PetDto(pet));
         return pets;
     }
 
@@ -38,11 +39,20 @@ export class PetService {
 
     async getPet(id: string) {
         try {
-            const pet = new PetDto((await this.petRepository.findOneOrFail(id, {relations: ['user']})));
+            const pet = new PetDto((await this.petRepository.findOneOrFail(id, { relations: ['user'] })));
             return pet;
         } catch (error) {
+            // tslint:disable-next-line:no-console
+            console.log(error);
             throw new NotFoundWithId(id, PetEntity.name);
         }
-        // return;
+    }
+
+    async updatePet(id: string, updatePet: UpdatePetDto) {
+        try {
+            return await this.petRepository.update(id, updatePet);
+        } catch (error) {
+            throw new NotFoundWithId(id, 'Pet');
+        }
     }
 }

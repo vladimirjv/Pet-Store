@@ -70,6 +70,7 @@ export class ConfigService {
             database: this.get('POSTGRES_DATABASE'),
             migrationsRun: true,
             logging: this.nodeEnv === 'development',
+            // logging: ['error', 'schema', 'warn', 'info', 'log'],
             // namingStrategy: new SnakeNamingStrategy(),
         };
     }
